@@ -3,12 +3,11 @@ package ru.geekbrains.march.market.dtos;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class ProductDto {
-    private Long id;
-    private String title;
-    private BigDecimal price;
-    private String categoryTitle;
+public class CartDto {
+    private List<CartItemDto> itemsDto;
+    private BigDecimal totalPrice;
 }

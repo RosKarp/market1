@@ -5,10 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.march.market.converters.ProductConverter;
 import ru.geekbrains.march.market.dtos.ProductDto;
-import ru.geekbrains.march.market.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.entities.Product;
+import ru.geekbrains.march.market.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.services.ProductService;
-
 import java.util.List;
 
 @RestController
@@ -32,7 +31,6 @@ public class ProductController {
 //        return new ResponseEntity<>(new AppError("RESOURCE_NOT_FOUND", "Продукт с id: " + id + " не найден"), HttpStatus.NOT_FOUND);
         return productConverter.entityToDto(productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Продукт с id: " + id + " не найден")));
     }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createNewProducts(@RequestBody ProductDto productDto) {
