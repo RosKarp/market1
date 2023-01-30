@@ -1,10 +1,10 @@
 package ru.geekbrains.march.market.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +23,7 @@ public class Category {
     private String title;
 
     @OneToMany(mappedBy = "category")
+    @JsonManagedReference           // важная вставка, иначе зацикливает, Stackoverflow
     private List<Product> products;
 
     @Column(name = "created_at")

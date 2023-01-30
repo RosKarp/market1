@@ -6,9 +6,10 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
-public class ProductDto {
-    private Long id;
-    private String title;
+public class CartItemDto {
+    private Long productId;
+    private String productTitle;
+    private int quantity;
+    private BigDecimal pricePerProduct;
     private BigDecimal price;
-    private String categoryTitle;
 }

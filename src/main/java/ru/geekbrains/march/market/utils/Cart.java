@@ -28,8 +28,37 @@ public class Cart {
         totalPrice = BigDecimal.ZERO;
     }
 
-    private void recalculate() {
+    public void recalculate() {
         totalPrice = BigDecimal.ZERO;
         items.forEach(i -> totalPrice = totalPrice.add(i.getPrice()));
+    }
+
+    public void removeItem(Product p) {
+        for (CartItem item : items) {
+            if (item.getProductId().equals(p.getId())) {
+                items.remove(item);
+                return;
+            }
+        }
+    }
+
+    public void decrementProductQuantity(Long id) {
+        for (CartItem item : items) {
+            if (item.getProductId().equals(id)) {
+                item.decrementQuantity();
+                recalculate();
+                return;
+            }
+        }
+    }
+
+    public void incrementProductQuantity(Long id) {
+        for (CartItem item : items) {
+            if (item.getProductId().equals(id)) {
+                item.incrementQuantity();
+                recalculate();
+                return;
+            }
+        }
     }
 }

@@ -2,10 +2,9 @@ package ru.geekbrains.march.market.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.march.market.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.entities.Product;
+import ru.geekbrains.march.market.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.utils.Cart;
-
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 
@@ -25,8 +24,24 @@ public class CartService {
         return cart;
     }
 
-    public void addToCart(Long productId) {
-        Product p = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Продукт с id: " + productId + " не найден"));
-        cart.add(p);
+    private Product productById (Long id) {
+        return productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Продукт с id: " + id + " не найден"));
     }
+
+    public void addToCart(Long productId) {
+        cart.add(productById(productId));
+    }
+
+    public void deleteProductFromCart(Long productId) {
+        cart.removeItem(productById(productId));
+        cart.recalculate();
+    }
+
+    public void clearAllCart() {
+        cart.clear();
+    }
+
+    public void subtractOne(Long id) {cart.decrementProductQuantity(id);}
+
+    public void addOne(Long id) {cart.incrementProductQuantity(id);}
 }
