@@ -2,6 +2,7 @@ package ru.geekbrains.march.market.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.march.market.aspect.Timer;
 import ru.geekbrains.march.market.entities.Product;
 import ru.geekbrains.march.market.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.utils.Cart;
@@ -19,7 +20,7 @@ public class CartService {
         cart = new Cart();
         cart.setItems(new ArrayList<>());
     }
-
+    @Timer
     public Cart getCurrentCart() {
         return cart;
     }
@@ -31,7 +32,7 @@ public class CartService {
     public void addToCart(Long productId) {
         cart.add(productById(productId));
     }
-
+    @Timer
     public void deleteProductFromCart(Long productId) {
         cart.removeItem(productById(productId));
         cart.recalculate();
