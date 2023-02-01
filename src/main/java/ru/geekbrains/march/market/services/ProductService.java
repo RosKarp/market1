@@ -2,6 +2,7 @@ package ru.geekbrains.march.market.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.march.market.aspect.Timer;
 import ru.geekbrains.march.market.dtos.ProductDto;
 import ru.geekbrains.march.market.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.entities.Product;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Timer
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
